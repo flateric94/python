@@ -31,3 +31,6 @@ plt.ylabel('y')
 plt.legend(loc=3)
 
 plt.show()
+
+#on a du ajouter une extension à python pour tracer les courbes (matplotlib) ainsi que la bibliothèque numpy
+#cmd en tant qu'admin, install matplotlib, telechargement et le tour est joué.
