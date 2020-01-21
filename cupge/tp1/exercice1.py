@@ -34,3 +34,4 @@ def puissance(x,n):
 for i in range(0,9) :
     print("2^{0}={1}".format(i,puissance(2,i)))
 
+print(5//2)
