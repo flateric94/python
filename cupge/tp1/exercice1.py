@@ -18,7 +18,15 @@ def power2(x,k):
     return(valeur)
 
 for i in range(0,4) :
-    print ("2^(2^{0})=2^{1}={2}".format(i,2**i,power2(2,i)))
+    print("2^(2^{0})=2^{1}={2}".format(i,2**i,power2(2,i)))
+
+def power2bis(x,k):
+    valeur=x
+    for i in range(k):
+        valeur=valeur*x
+    return(valeur)
+
+print(power2bis(2,2))
 
 #question3) tout nombre n peut s'écrire sous forme Somme(ak2^k) avec ak=1ou0
 
