@@ -4,20 +4,25 @@ def power(x,n):
     valeur=1
     for i in range(n):
         valeur=valeur*x
+        # print(i,valeur)
     return(valeur)
 
-print(power(3,3)) #renvoit 27
-print(power(4,2)) #renvoit 16
+print("##### power #####")
+# print(power(3,3)) #renvoit 27
+# print(power(4,2)) #renvoit 16
+# print(power(2,8))
+print("### fin power ####")
 
 #question2) dans le cas où n puissance de 2, simplifier algorithme
-
 def power2(x,k):
     valeur=x
     for i in range(k):
-        valeur=valeur*x
+        valeur=valeur*valeur
     return(valeur)
 
-print(power2bis(2,2))
+print("##### power2 #####")
+# print(power2(2,3))
+print("### fin power2 ####")
 
 #question3) tout nombre n peut s'écrire sous forme Somme(ak2^k) avec ak=1ou0
 

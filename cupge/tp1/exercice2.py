@@ -4,7 +4,7 @@ def testperm(a):
     n=len(a)
     for i in range(n):
         # print(a[i])
-        if a[i]<0 or a[i]>n:
+        if a[i]<0 or a[i]>n-1:
             return("erreur")
         for j in range(i+1,n):
             # print(i,j)
@@ -13,31 +13,54 @@ def testperm(a):
         
     return("c'est bon")
 
-# print(testperm([1,2,3]))
-# print(testperm([6,4,3,1,2,5]))
+# print(testperm([1,1,2])) 
+# print(testperm([0,1,2]))
+# print(testperm([0,4,3,1,2,5]))
 # print(testperm([1,1,0]))
 # print(testperm([2,0,1,2]))
 # print(testperm([0,2,3,6,3]))
 # print(testperm([-1,3,8,4,0,78]))
 
 #question2) on introduit un tableau l dans lequel on va se souvenir des éléments déjà utilisés dans la construction d'une permutation
-
-def testpermoptial(a):
+# ici : avec interruption immédiate
+def testpermoptial(a):   
     n=len(a)
     l=[0]*n
     for i in range(n):
         # print(a[i])
-        if a[i]<0 or a[i]>len(a):
-            return("erreur")
-        if l[a[i]-1]==0:
+        if a[i]<0 or a[i]>n-1:
+            return("erreur : le terme est en dehors des valeurs acceptables")
+        if l[a[i]]==0:
+            # print(l[a[i]])
+            l[a[i]]=1
+            # print(l[a[i]])
+        else:
+            return("erreur : j'ai trouvé le premier doublon")
+    return("correct")
+     
+# print(testpermoptial([1,1,3,4]))
+# print(testpermoptial([2,3,1,2]))
+# print(testpermoptial([1,2,4,45,5]))
+
+# ici : avec comparaison finale
+def testpermoptial2(a):   
+    n=len(a)
+    l=[0]*n
+    for i in range(n):
+        # print(a[i])
+        if a[i]<0 or a[i]>n-1:
+            return("erreur : le terme est en dehors des valeurs acceptables")
+        if l[a[i]]==0:
             # print(l[a[i]-1])
-            l[a[i]-1]=1
+            l[a[i]]=1
             # print(l[a[i]-1])
         else:
-            return("erreur")
-    return("correct")
+            l[a[i]]=0
+    if l==[1]*4:
+        return("correct : pas de doublons")
+    else:
+        # print(l)
+        return("incorrect : il y a au moins un doublon")
 
-     
-print(testpermoptial([1,2,3,4]))
-print(testpermoptial([2,3,1,2]))
-print(testpermoptial([1,2,4,45,5]))
+# print(testpermoptial2([0,0,2,3]))
+
