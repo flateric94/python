@@ -4,7 +4,7 @@ def testperm(a):
     n=len(a)
     for i in range(n):
         # print(a[i])
-        if a[i]<0 or a[i]>len(a):
+        if a[i]<0 or a[i]>n:
             return("erreur")
         for j in range(i+1,n):
             # print(i,j)
@@ -30,7 +30,9 @@ def testpermoptial(a):
         if a[i]<0 or a[i]>len(a):
             return("erreur")
         if l[a[i]-1]==0:
-           l[a[i]-1]=1
+            # print(l[a[i]-1])
+            l[a[i]-1]=1
+            # print(l[a[i]-1])
         else:
             return("erreur")
     return("correct")
