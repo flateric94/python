@@ -7,11 +7,11 @@ def power(x,n):
         # print(i,valeur)
     return(valeur)
 
-print("##### power #####")
+# print("##### power #####")
 # print(power(3,3)) #renvoit 27
 # print(power(4,2)) #renvoit 16
 # print(power(2,8))
-print("### fin power ####")
+# print("### fin power ####")
 
 #question2) dans le cas où n puissance de 2, simplifier algorithme
 def power2(x,k):
@@ -20,9 +20,9 @@ def power2(x,k):
         valeur=valeur*valeur
     return(valeur)
 
-print("##### power2 #####")
+# print("##### power2 #####")
 # print(power2(2,3))
-print("### fin power2 ####")
+# print("### fin power2 ####")
 
 #question3) tout nombre n peut s'écrire sous forme Somme(ak2^k) avec ak=1ou0
 
@@ -35,6 +35,7 @@ def puissance(x,n):
         n=n//2
     return(valeur)
 
-for i in range(0,9) :
-    print("2^{0}={1}".format(i,puissance(2,i)))
-
+# print("#### puissance ####")
+# for i in range(0,9) :
+#     print("2^{0}={1}".format(i,puissance(2,i)))
+# print("#### fin puissance ####")
