@@ -6,4 +6,4 @@ def fibonacci(N):
         U[i]=U[i-1]+U[i-2]        
     return(print(U))
 
-print(fibonacci(30))
+print(fibonacci(10))
