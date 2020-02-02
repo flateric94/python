@@ -30,7 +30,13 @@ def sansdoublon(l):
 # print(sansdoublon([1,2,3,1,8]))
 # print("#### fin test sansdoublon ####")
 
-def intuition(n):
+def intuition1(n):
+    L=listealeatoire(n)
+    return(sansdoublon(L))
+
+print(intuition1(23))
+
+def intuition2(n):
     marqueur=0
     for i in range(100):
         L=listealeatoire(n)
@@ -40,18 +46,7 @@ def intuition(n):
             marqueur=marqueur+1
     return(marqueur)
 
-print(intuition(37))
-
-def graph(N):
-    X=[]
-    Y=[]
-    for i in range(N):
-        X=X+[i]
-        Y=Y+[intuition(10)]
-    plt.plot(X,Y)
-    plt.show()
-
-graph(10)
+print(intuition2(37))   #sur 100 tests, combien de fois a-t-il trouvé un doublon??
 
 
 
