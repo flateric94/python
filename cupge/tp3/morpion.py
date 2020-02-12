@@ -1,8 +1,3 @@
-""" question1)
-créer une classe morpion() et sa fonction init qui définit l'état initial du plateau de jeu.
-On notera le plateau par une liste, emplie initialement de zéros 3*3. La classe doit prendre
-en argument le nom du joueur qui commence ("humain" ou "ordinateur").
-"""
 # "apprehendez les classes, openclassroom" : 
 #https://openclassrooms.com/fr/courses/235344-apprenez-a-programmer-en-python/232721-apprehendez-les-classes
 
@@ -13,7 +8,7 @@ def incremente_joueur():
     global compteJoueur # explique qu'on se referre à la variable globale, sinon on ne peut la modifier depuis une methode
     compteJoueur += 1
 
-class joueur():
+class joueur():   #définition de notre classe joueur
     """Classe définissant les informations relatives aux joueurs par : 
     -   le type du joueur (ordinateur ou humain)
     -   le type de sigle utilisé (x ou o)
@@ -21,7 +16,7 @@ class joueur():
     --> va simplifier le problème pour l'attribution des joueurs, permettant de faire joueur 
     humain/humain, ordi/ordi
     """
-    def __init__(self, typedejoueur, sigle):
+    def __init__(self, typedejoueur, sigle): # Notre méthode constructeur 
         if typedejoueur not in ["humain" , "ordinateur"]:
             print("attribuer un nom correct (humain/ordinateur)")
             return
@@ -31,6 +26,11 @@ class joueur():
             self.sigle = sigle
             self.nom = typedejoueur + str(compteJoueur)
 
+    """ question1)
+    créer une classe morpion() et sa fonction init qui définit l'état initial du plateau de jeu.
+    On notera le plateau par une liste, emplie initialement de zéros 3*3. La classe doit prendre
+    en argument le nom du joueur qui commence ("humain" ou "ordinateur").
+    """
 
 class morpion:   #défition de notre classe morpion
     """Classe définissant l'état initial du plateau de jeu par :
@@ -82,14 +82,14 @@ class morpion:   #défition de notre classe morpion
             self.joueur_humain(sigle)
         #la case se remplit
         else:
-            self.plateau[ligne][colonne]=1
+            self.plateau[ligne][colonne] = sigle
             self.afficher_plateau()
 
     def trouver_cases_vides(self):
-        #  """question4)
-        # écrire une fonction trouver_cases_vides() qui renvoie une liste des indices (lignes, colonnes)
-        # des cases vides.
-        # """
+        """question4)
+        écrire une fonction trouver_cases_vides() qui renvoie une liste des indices (lignes, colonnes)
+        des cases vides.
+        """
         liste_indice_cases_vides=[]
         for i in range(3):
             for j in range(3):
@@ -106,7 +106,10 @@ class morpion:   #défition de notre classe morpion
         self.plateau[i][j]=sigle
         self.afficher_plateau()
 
-    def jouer_uncoup(self, indiceJoueur):
+    def jouer_un_coup(self, indiceJoueur):
+        """
+        va nous permettre de pouvoir faire jouer nos joueurs tour par tour (coup par coup)
+        """
         print(self.joueurs[indiceJoueur].nom + " joue:")
         if self.joueurs[indiceJoueur].typedejoueur == "humain":
             self.jouer_humain(self.joueurs[indiceJoueur].sigle)
@@ -135,25 +138,24 @@ class morpion:   #défition de notre classe morpion
             resultat=0
         if self.plateau[0][2]==1 and self.plateau[1][1]==1 and self.plateau[2][0]==1:
             resultat=0
-        else:
-            if self.plateau[0][0]==-1 and self.plateau[0][1]==-1 and self.plateau[0][2]==-1:
-                resultat=1
-            if self.plateau[1][0]==-1 and self.plateau[1][1]==-1 and self.plateau[1][2]==-1:
-                resultat=1
-            if self.plateau[2][0]==-1 and self.plateau[2][1]==-1 and self.plateau[2][2]==-1:
-                resultat=1
-            if self.plateau[0][0]==-1 and self.plateau[1][0]==-1 and self.plateau[2][0]==-1:
-                resultat=1
-            if self.plateau[0][1]==-1 and self.plateau[1][1]==-1 and self.plateau[2][1]==-1:
-                resultat=1
-            if self.plateau[0][2]==-1 and self.plateau[1][2]==-1 and self.plateau[2][2]==-1:
-                resultat=1
-            if self.plateau[0][0]==-1 and self.plateau[1][1]==-1 and self.plateau[2][2]==-1:
-                resultat=1
-            if self.plateau[0][2]==-1 and self.plateau[1][1]==-1 and self.plateau[2][0]==-1:
-                resultat=1
+        if self.plateau[0][0]==-1 and self.plateau[0][1]==-1 and self.plateau[0][2]==-1:
+            resultat=1
+        if self.plateau[1][0]==-1 and self.plateau[1][1]==-1 and self.plateau[1][2]==-1:
+            resultat=1
+        if self.plateau[2][0]==-1 and self.plateau[2][1]==-1 and self.plateau[2][2]==-1:
+            resultat=1
+        if self.plateau[0][0]==-1 and self.plateau[1][0]==-1 and self.plateau[2][0]==-1:
+            resultat=1
+        if self.plateau[0][1]==-1 and self.plateau[1][1]==-1 and self.plateau[2][1]==-1:
+            resultat=1
+        if self.plateau[0][2]==-1 and self.plateau[1][2]==-1 and self.plateau[2][2]==-1:
+            resultat=1
+        if self.plateau[0][0]==-1 and self.plateau[1][1]==-1 and self.plateau[2][2]==-1:
+            resultat=1
+        if self.plateau[0][2]==-1 and self.plateau[1][1]==-1 and self.plateau[2][0]==-1:
+            resultat=1
         if resultat in [0, 1]:
-            return(resultat)
+            return resultat
         else:
             return None
 
@@ -161,7 +163,7 @@ class morpion:   #défition de notre classe morpion
         self.afficher_plateau()
         while self.partie_gagnee() != 0 or self.partie_gagnee() != 1 or self.partie_gagnee() != None:
             for i in range(9):
-                self.jouer_uncoup(i%2)
+                self.jouer_un_coup(i%2)
                 if self.partie_gagnee() in [0, 1]:
                     print(self.joueurs[self.partie_gagnee()].nom + " remporte la partie.")
                     return
@@ -169,5 +171,5 @@ class morpion:   #défition de notre classe morpion
             return
 
         
-partie = morpion("humain", "ordinateur")
+partie = morpion("ordinateur", "ordinateur")
 partie.jouer()
