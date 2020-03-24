@@ -12,10 +12,13 @@ def hanoi(nombre_de_disque , tour_de_depart , tour_d_arrive):
         deplacer(tour_de_depart , tour_d_arrive , 1)
     else:
         autre_tour = 3 - tour_de_depart - tour_d_arrive
+        # 1/ deplacer n-1 disques de la "tour de depart" à "autre tour"
         hanoi(nombre_de_disque - 1 , tour_de_depart , autre_tour)
+        # 2/ deplacer 1 disque de la tour de "tour de depart" a "tour d'arrive"
         deplacer(tour_de_depart , tour_d_arrive , nombre_de_disque)
+        # 3/ deplacer n-1 disques de la tour "autre tour" a "tour d'arrivee"
         hanoi(nombre_de_disque - 1 , autre_tour , tour_d_arrive)
-    return
+    return 
 
-print(hanoi(3,1,2))
+print(hanoi(4,0,1))
 

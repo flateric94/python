@@ -1,20 +1,20 @@
 #parenthèsage
 
 def parenthèsage(L):
-    p = []                  #ma pile
+    pile = []                  #ma pile
     n=len(L)
     for i in range(n):
         if L[i] == "(":
-            p.append(i)     #lorsque je rencontre une parenthèse ouvrante, j’empile sa position
+            pile.append(i)     #lorsque je rencontre une parenthèse ouvrante, j’empile sa position
         elif L[i] == ")":
-            if p == []:
+            if pile == []:
                 return(" ) à l'indice "+ str(i) +" n'est pas ouverte ")
             else:
-                p.pop()
-    if p == []:
+                pile.pop()
+    if pile == []:
         return("parenthèsage Ok")
     else:
-        return("( à l'indice "+ str(p[-1]) +" n'est pas refermée")  #sommet : p[-1]
+        return("( à l'indice "+ str(pile[-1]) +" n'est pas refermée")  #sommet : pile[-1]
 
 # lorsque je rencontre une parenthèse fermante, la position de la parenthèse ouvrante correspondante
 # est censée être au sommet de la pile, donc si la pile est vide je renvoie un message d’erreur, sinon je

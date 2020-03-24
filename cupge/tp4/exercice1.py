@@ -19,7 +19,7 @@ def nombres_premiers(n):
 
 #avec crible d'erastothène:
 
-def erastothène(n):
+def eratosthène(n):
     L = [0,0] + [i for i in range(2,n+1)]
     for i in range(n+1):
         if L[i] != 0:
@@ -28,4 +28,4 @@ def erastothène(n):
     return([k for k in L if k != 0])
 
 
-print(erastothène(100))
+print(eratosthène(100))
