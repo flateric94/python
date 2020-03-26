@@ -62,14 +62,17 @@ monGraphe.ajouterArrete(2,3)
 monGraphe.ajouterArrete(3,7)
 
 # test trouverVoisin
+print("#### test trouverVoisin ####")
 print(monGraphe.trouverVoisins(3))
 
 # test parcours largeur
-print("###########")
+print("")
+print("#### test parcours largeur ####")
 monGraphe.parcoursLargeur(5)
 
 # test parcours longueur
-print("###########")
+print("")
+print("#### test parcours longueur ####")
 monGraphe.parcoursProfondeur(4, [])
 
 
@@ -143,8 +146,9 @@ monGraphe.ajouterArrete(4,5,1)
 monGraphe.ajouterArrete(2,5,3)
 
 
-# test dijkstra : 
-print("##########")
+# test dijkstra :
+print("") 
+print("#### test dijkstra ####")
 print(monGraphe.dijkstra(0,2))
                     
 

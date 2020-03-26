@@ -65,9 +65,11 @@ sousarbre10 = Arbre(10, None, sousarbre14)
 monArbre = Arbre(8, sousarbre3, sousarbre10)
 
 # affichage de l'arbre
+print("#### test affichage de l'arbre ####")
 monArbre.afficherPrefixe()
 
 # insertion valeur
-print("###############")
+print("")
+print("#### test insertion valeur ####")
 monArbre.inserer(15)
 monArbre.afficherPrefixe()
