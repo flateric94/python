@@ -21,6 +21,7 @@ plt.show()
 # question 2) :
 
 # influence de e :
+
 theta = np.linspace(0 , 4*np.pi , 1000)
 theta0 = np.pi/3
 p = 1
