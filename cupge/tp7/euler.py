@@ -55,10 +55,8 @@ t2 = np.linspace(0,10,100)
 L = [0,10,20,30,2.89]
 y2 = Euler_mod(f,L,t2)
 for i in range(len(L)):
-    plt.figure()
     plt.plot(t2,y2[i],'r')
-    plt.grid()
-    plt.show()
+plt.show()
 
 # question 7)
 
