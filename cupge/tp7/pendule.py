@@ -9,6 +9,8 @@ l = 50*10**(-2)
 omega0 = np.sqrt(g/l)
 theta0 = np.pi/100
 
+#######    PENDULE SIMPLE    #######
+
 # question 1)
 
 def solution(t,theta0,omega0):
@@ -71,4 +73,7 @@ print(W)
 inds = argrelextrema(Theta, np.greater)
 T = (t[inds[0][len(inds)]] - t[inds[0][0]])/len(inds)
 print(T)
+
+
+#######    PENDULE DOUBLE    #######
 
