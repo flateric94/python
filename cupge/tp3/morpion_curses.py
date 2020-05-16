@@ -2,6 +2,7 @@
 #https://openclassrooms.com/fr/courses/235344-apprenez-a-programmer-en-python/232721-apprehendez-les-classes
 
 import random as rd
+import curses
 
 compteJoueur = 0 # va servir a affecter un numero derriere chaque joueur pour les differencier
 def incremente_joueur():
@@ -58,6 +59,30 @@ class morpion:   #défition de notre classe morpion
                     ligne.append(" ")
             print(ligne)
 
+    def afficher_plateau_curses(self):
+        Y = 5
+        X = 5
+        for i in range(3):
+            ligne = []
+            for j in range(3):
+                if self.plateau[i][j]==1:
+                    sw_affichage_morpion.addstr(Y,X,"O")
+                    # ligne.append("o")
+                elif self.plateau[i][j]==-1:
+                    sw_affichage_morpion.addstr(Y,X,"X")
+                    # ligne.append("x")
+                elif self.plateau[i][j]==0:
+                    sw_affichage_morpion.addstr(Y,X," ")
+                    # ligne.append(" ")
+                sw_affichage_morpion.addstr(Y,X+1,"|")
+                print(X)
+                X += 2
+            X = 5
+            sw_affichage_morpion.addstr(Y+1,X,"-+-+-|")
+            Y += 2
+        sw_affichage_morpion.refresh()
+        
+
     def jouer_humain(self, sigle):
         """ question3)
         écrire une fonction jouer_humain() qui vous permet via input() de dire où vous voulez jouer
@@ -84,6 +109,39 @@ class morpion:   #défition de notre classe morpion
         else:
             self.plateau[ligne][colonne] = sigle
             self.afficher_plateau()
+            self.afficher_plateau_curses()
+
+    def jouer_humain_curses(self, sigle):
+        """ question3)
+        écrire une fonction jouer_humain() qui vous permet via input() de dire où vous voulez jouer
+        en numéro de ligne et de colonne. Cette fonction doit gérer le fait que vous n'avez le droit de 
+        jouer que dans une case vide.
+        """
+        # choix de la ligne et vérification de son existence
+        print("choisissez la ligne : ")
+        # sw_affichage_instruction.addstr(1,1,"choisissez la ligne : ")
+        # entree = sw_affichage_instruction.getstr(2,1).decode(encoding="utf-8")
+        # sw_affichage_instruction.refresh()
+        # sw_affichage_instruction.addstr(2,1,entree)
+        ligne=int(input())
+        if ligne>2 or ligne<0:
+            print("les lignes existantes sont entres 0 et 2")
+            self.joueur_humain(sigle)
+        # choix de la colonne et vérification de son existence
+        print("choisissez la colonne : ")
+        colonne=int(input())
+        if colonne>2 or colonne<0:
+            print("les colonnes existantes sont entres 0 et 2")
+            self.joueur_humain(sigle)
+        #vérification case vide
+        if self.plateau[ligne][colonne] != 0:
+            print("joue dans une case vide")
+            self.joueur_humain(sigle)
+        #la case se remplit
+        else:
+            self.plateau[ligne][colonne] = sigle
+            self.afficher_plateau()
+            self.afficher_plateau_curses()
 
     def trouver_cases_vides(self):
         """question4)
@@ -105,6 +163,7 @@ class morpion:   #défition de notre classe morpion
         (i,j)=rd.choice(L)
         self.plateau[i][j]=sigle
         self.afficher_plateau()
+        self.afficher_plateau_curses()
 
     def jouer_un_coup(self, indiceJoueur):
         """
@@ -112,7 +171,8 @@ class morpion:   #défition de notre classe morpion
         """
         print(self.joueurs[indiceJoueur].nom + " joue:")
         if self.joueurs[indiceJoueur].typedejoueur == "humain":
-            self.jouer_humain(self.joueurs[indiceJoueur].sigle)
+            # self.jouer_humain(self.joueurs[indiceJoueur].sigle)
+            self.jouer_humain_curses(self.joueurs[indiceJoueur].sigle)
         else:
             self.jouer_aleatoire(self.joueurs[indiceJoueur].sigle)
     
@@ -161,6 +221,7 @@ class morpion:   #défition de notre classe morpion
 
     def jouer(self):
         self.afficher_plateau()
+        self.afficher_plateau_curses()
         while self.partie_gagnee() != 0 or self.partie_gagnee() != 1 or self.partie_gagnee() != None:
             for i in range(9):
                 self.jouer_un_coup(i%2)
@@ -170,6 +231,18 @@ class morpion:   #défition de notre classe morpion
             print("Match nul, pas de gagnant")
             return
 
+# demarre curses
+stdscr = curses.initscr()
+
+sw_affichage_morpion = stdscr.subwin(17,17,0,60)
+sw_affichage_morpion.box()
+sw_affichage_morpion.refresh()
+
+sw_affichage_instruction = stdscr.subwin(20,60,0,0)
+sw_affichage_instruction.box()
+sw_affichage_instruction.refresh()
         
-partie = morpion("ordinateur", "ordinateur")
+partie = morpion("ordinateur", "humain")
 partie.jouer()
+sw_affichage_morpion.getkey()
+
