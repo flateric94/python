@@ -95,6 +95,7 @@ def Euler_2(f,y0,v0,t):
         y.append(y[i-1] + v[i-1]*(t[i]-t[i-1]))
     return(y)
 
+
 t = np.linspace(0,10,10000)
 y = Euler_2(f,1,0,t)
 plt.plot(t,y)
