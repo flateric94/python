@@ -16,10 +16,11 @@ class Cell:
         # score de la cellule
         self.score = score
         # position (x,y) de la cellule d'avant
-        self.prev_pos = prev_pos
         # condittion d'initialisation
         if self.prev_pos == None:
             self.prev_pos = []
+        else:
+            self.prev_pos = prev_pos
 
     def __repr__(self):
         return "Val = {}\nDir = {}\n".format(self.score,self.prev_pos)
@@ -219,7 +220,7 @@ class DynamicMatrix:
             for j in range(1, len(self.seq_top) + 1):
         # On va initialiser les 3 cases : top_score, diago_score, left_score
                 '''
-                    [diago_score][top_score (attention au indel)](j)
+                                        [diago_score][top_score (attention au indel)](j)
                     [left_score (attention au indel)][la case à qui on veut attribuer un score]
                     (i)
                 '''
@@ -234,14 +235,24 @@ class DynamicMatrix:
                 diago_prev_pos = [i-1 , j-1]
 
                 score_retenu = max(top_score, left_score, diago_score)
+
                 self.matrix[i][j].score = score_retenu
+                # VERSION SANS RECURSIVITE
                 # On va mettre à jour la position précédente
+
+                # if left_score == score_retenu:
+                #     self.matrix[i][j].prev_pos = left_prev_pos
+                # elif top_score == score_retenu:
+                #     self.matrix[i][j].prev_pos = top_prev_pos
+                # elif diago_score == score_retenu:
+                #     self.matrix[i][j].prev_pos = diago_prev_pos
                 if left_score == score_retenu:
-                    self.matrix[i][j].prev_pos = left_prev_pos
-                elif top_score == score_retenu:
-                    self.matrix[i][j].prev_pos = top_prev_pos
-                elif diago_score == score_retenu:
-                    self.matrix[i][j].prev_pos = diago_prev_pos
+                    self.matrix[i][j].prev_pos.append(left_prev_pos)
+                if top_score == score_retenu:
+                    self.matrix[i][j].prev_pos.append(top_prev_pos)
+                if diago_score == score_retenu:
+                    self.matrix[i][j].prev_pos.append(diago_prev_pos)
+
 
 # Question 7)
 
@@ -267,16 +278,18 @@ class DynamicMatrix:
         prev_pos = []
         while prev_pos != [0,0] :
             prev_pos = self.matrix[current_position[0]][current_position[1]].prev_pos
-            if ((current_position[0] == prev_pos[0]) & (current_position[1] == prev_pos[1])) :
+            if (current_position[0] == prev_pos[0]) :
                 ali_seq_left += "-"
-                ali_seq_top += "-"
-            else :
+            else : 
                 ali_seq_left += self.seq_left[prev_pos[0]]
+            if (current_position[1] == prev_pos[1]) :
+                ali_seq_top += "-"
+            else :                
                 ali_seq_top += self.seq_top[prev_pos[1]]
             current_position = prev_pos
         return ali_seq_top, ali_seq_left, score
             
-        
+# QUESTION BONUS : BACKTRACKING        
 
 def main():
     """ The main of TP3"""
