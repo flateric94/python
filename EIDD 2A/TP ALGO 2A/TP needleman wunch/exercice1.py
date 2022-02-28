@@ -173,11 +173,11 @@ class DynamicMatrix:
 # Question 4)
 
     def compare(self, ntd_a, ntd_b):
-        '''consigne : 
-        creation d'une fonction comparant les nucleo
-        retourne : la valeur de match si c'est identique
-                    mismatch sinon 
-        '''
+        """
+        Compare to nucleotides and return:
+        the match value if they are identical,
+        mismatch otherwise
+        """
         if ntd_a == ntd_b : 
             # return 2
             return self.match
